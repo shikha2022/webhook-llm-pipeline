@@ -21,8 +21,9 @@ pip install flask python-dotenv requests boto3
 cp .env.example .env                                  # defaults to LLM_PROVIDER=mock
 python app.py                                         # terminal 1
 python send_test.py                                   # terminal 2
+python send_test.py bad_payload.json                  # broken event: see the checks flag it
 ```
-Run `send_test.py` twice to see the duplicate handling. Events appear under `./data/events/`.
+Run `send_test.py` twice to see the duplicate handling. Events appear under `./data/events/`.The bad payload has no `country` and a negative `revenue`, so the summary should flag both.
 
 ## Turn on the real pieces
 - **LLM:** `pip install anthropic` (or `openai`), then set `LLM_PROVIDER` and the matching API key in `.env`. For OpenAI also set `LLM_MODEL`. API calls are billed by the provider, so check pricing first.
