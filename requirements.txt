@@ -1,0 +1,7 @@
+flask
+python-dotenv
+requests
+boto3
+# install only the one you use:
+anthropic
+openai
