@@ -1,0 +1,10 @@
+{
+  "event_id": "evt_2002",
+  "event_type": "install_attributed",
+  "app": "demo-app",
+  "partner": "example-network",
+  "campaign": "winter_sale_ctv",
+  "platform": "CTV",
+  "revenue": -5,
+  "timestamp": "2026-11-11T09:30:00Z"
+}
