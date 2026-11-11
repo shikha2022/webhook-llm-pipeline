@@ -9,7 +9,7 @@ import os
 
 PROMPT = (
     "You are an integration support engineer. Summarise this webhook event in 2 sentences "
-    "for a customer: what happened, and anything that looks wrong or worth checking.\n\n{event}"
+    "for a customer: what happened, and anything that looks wrong or worth checking.Today's date is 11/11/2026.\n\n{event}"
 )
 
 
@@ -28,10 +28,10 @@ def summarize(payload: dict) -> str:
         client = anthropic.Anthropic()
         msg = client.messages.create(
             model=os.getenv("LLM_MODEL", "claude-haiku-5-5"),
-            max_tokens=300,
+            max_tokens=1024,
             messages=[{"role": "user", "content": PROMPT.format(event=event)}],
         )
-        return msg.content[0].text.strip()
+        return "".join(b.text for b in msg.content if b.type == "text").strip()
 
     if provider == "openai":
         from openai import OpenAI
