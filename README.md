@@ -20,7 +20,7 @@ Sender ──POST /webhook──▶ verify signature ─▶ dedupe by event_id �
 ```
 python -m venv venv && source venv/bin/activate     # Windows: venv\Scripts\activate
 pip install flask python-dotenv requests boto3
-cp .env.example .env                                  # defaults to LLM_PROVIDER=mock
+echo "LLM_PROVIDER=mock" > .env                       # mock mode: no API key or AWS needed
 python app.py                                         # terminal 1
 python send_test.py                                   # terminal 2
 python send_test.py bad_payload.json                  # broken event: see the checks flag it
@@ -32,6 +32,7 @@ The bad payload has no `country` and a negative `revenue`, so the summary should
 
 ## Turn on the real pieces
 
+- Add these settings to your `.env` file. Never commit `.env`; it is already in `.gitignore`.
 - **LLM:** `pip install anthropic` (or `openai`), then set `LLM_PROVIDER` and the matching API key in `.env`. For OpenAI, also set `LLM_MODEL`. Uses a paid API when enabled.
 - **S3:** set `S3_BUCKET` and AWS credentials (or use `aws configure`). Use a bucket and an IAM user created just for this project.
 
