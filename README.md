@@ -24,6 +24,7 @@ echo "LLM_PROVIDER=mock" > .env                       # mock mode: no API key or
 python app.py                                         # terminal 1
 python send_test.py                                   # terminal 2
 python send_test.py bad_payload.json                  # broken event: see the checks flag it
+pytest -v test_pipeline.py                            # run the automated tests
 ```
 
 Run `send_test.py` twice to see the duplicate handling. Events appear under `./data/events/`.
